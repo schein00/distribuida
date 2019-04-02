@@ -128,187 +128,36 @@ public class Atendente implements Runnable{
 		
 		
 		String mensagem = "";
-		String s[] = new String[dados.size()];
-		String s2[] = new String[dados.size()];
-		String c[] = new String[dados.size()];
-		double a = 0, x = 0, dist = 0;
-
-		for (int i = 0; i < dados.size(); i++) {
-			if(i == 0) {
-				mensagem = ",";
-				continue;
-			}
-			System.out.println("for cabecalho");
-			s = dados.get(i -1).split(",");
-			if( i != (dados.size() - 1)) {
-				System.out.println(s[0]);
-				mensagem = mensagem + s[0] +",";
-			}else{
-				System.out.println(s[0]);
-				mensagem = mensagem + s[0];
-			}
-		}
-		System.out.println(mensagem);
-		output.println(mensagem);
-		
-		for (int i = 0; i < (dados.size()-1); i++) {
-			System.out.println(dados.get(i));
+		String s[];
+		int x = 0, result = 0;
+		z = 0;
+		for(int i = 0; i < dados.size()-1;i++){
+			System.out.println("i: " + i);
 			s = dados.get(i).split(",");
+			System.out.println("primeiro: "+ s[0] + "  segundo: " + s[1]);
+			
+			z = Integer.parseInt(s[0]);
+			x = Integer.parseInt(s[1]);
 
-			
-			
-			s[2] = s[2].trim();
-			if(s[2].contains("�")) {
-				c = s[2].split("°");
-			}else {
-				c = s[2].split("�");
-			}
-			d1 = Double.parseDouble(c[0].trim());
-			c[1] = c[1].trim();
-			c = c[1].split("\'");
-			d2 = Double.parseDouble(c[0].trim());
-			c[1] = c[1].trim();
-			//c[1].replace("', ' ');
-			c = c[1].split("\"");
-			d3 = Double.parseDouble(c[0].trim());	
-			lon1 = d1 + d2 / 60 + d3 / 3600;
-			
-			if(c[1].contains("S")) {
-				lat1 = lat1 * (-1);
-			}
-			if(c[1].contains("W")) {
-				lon1 = lon1 * (-1);
-			}
-			
-			
-			lat1 = Math.toRadians(lat1);
-			lon1 = Math.toRadians(lon1);
-			
-			
-			//mensagem = mensagem + "," + lat1+","+lon1;
-			
-			for (int j = 0; j < (dados.size() - 1); j++) {
-				a = 0;
-				x = 0;
-				dist = 0;
-				d1 = 0;
-				d2 = 0;
-				d3 = 0;		
-				if(i == j && j > 0) {
-					mensagem = mensagem + "0,";
-					continue;
-				}
-				if(j == 0 && i == j) {
-					mensagem = s[0]+", 0,";
-				}else if(j == 0) {
-					s2 = dados.get(j).split(",");
-					s2[1] = s2[1].trim();
-					if(s[1].contains("�")) {
-						c = s[1].split("°");
-					}else {
-						c = s[1].split("�");
-					}
-					d1 = Double.parseDouble(c[0].trim());
-					c[1] = c[1].trim();
-					c = c[1].split("\'");
-					d2 = Double.parseDouble(c[0].trim());
-					c[1] = c[1].trim();
-					c = c[1].split("\"");
-					d3 = Double.parseDouble(c[0].trim());	
-					System.out.println("for i "+d3);
-					lat2 = d1 + d2 / 60 + d3 / 3600;
-	
-					s2[2] = s2[2].trim();
-					if(s[2].contains("�")) {
-						c = s[2].split("°");
-					}else {
-						c = s[2].split("�");
-					}
-					d1 = Double.parseDouble(c[0].trim());
-					c[1] = c[1].trim();
-					c = c[1].split("\'");
-					d2 = Double.parseDouble(c[0].trim());
-					c[1] = c[1].trim();
-					c = c[1].split("\"");
-					d3 = Double.parseDouble(c[0].trim());	
-					lon2 = d1 + d2 / 60 + d3 / 3600;
-				
-					if(c[1].contains("S")) {
-						lat2 = lat2 * (-1);
-					}
-					if(c[1].contains("W")) {
-						lon2 = lon2 * (-1);
-					}
-					
-					lat2 = Math.toRadians(lat2);
-					lon2 = Math.toRadians(lon2);
-					
-					
-					a = Math.sin((lat2 - lat1)/2) * Math.sin((lat2 - lat1)/2) + 
-							Math.cos(lat1) * Math.cos(lat2) * Math.sin((lon2 - lon1)/2) * Math.sin((lon2 - lon1)/2);
-					
-					x = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+			System.out.println("z: "+ z + "  x: " + x);
 
-					dist = 6371 * x;
-					int u = (int) dist;
-					mensagem = s[0]+","+ u +",";
-				}else {
-					s2 = dados.get(j).split(",");
-					s2[1] = s2[1].trim();
-					if(s[1].contains("�")) {
-						c = s[1].split("°");
-					}else {
-						c = s[1].split("�");
-					}
-					d1 = Double.parseDouble(c[0].trim());
-					c[1] = c[1].trim();
-					c = c[1].split("\'");
-					d2 = Double.parseDouble(c[0].trim());
-					c[1] = c[1].trim();
-					c = c[1].split("\"");
-					d3 = Double.parseDouble(c[0].trim());	
-					lat2 = d1 + d2 / 60 + d3 / 3600;
-	
-					s2[2] = s2[2].trim();
-					if(s[2].contains("�")) {
-						c = s[2].split("°");
-					}else {
-						c = s[2].split("�");
-					}
-					d1 = Double.parseDouble(c[0].trim());
-					c[1] = c[1].trim();
-					c = c[1].split("\'");
-					d2 = Double.parseDouble(c[0].trim());
-					c[1] = c[1].trim();
-					c = c[1].split("\"");
-					d3 = Double.parseDouble(c[0].trim());	
-					lon2 = d1 + d2 / 60 + d3 / 3600;
-				
-					if(c[1].contains("S")) {
-						lat2 = lat2 * (-1);
-					}
-					if(c[1].contains("W")) {
-						lon2 = lon2 * (-1);
-					}
-					lat2 = Math.toRadians(lat2);
-					lon2 = Math.toRadians(lon2);
-					
-					
-					a = Math.sin((lat2 - lat1)/2) * Math.sin((lat2 - lat1)/2) + 
-							Math.cos(lat1) * Math.cos(lat2) * Math.sin((lon2 - lon1)/2) * Math.sin((lon2 - lon1)/2);
-					
-					x = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-					dist = 6371 * x;
-					int u = (int) dist;
-					mensagem = mensagem + u +",";
-				}
+			result = z;
+			System.out.println("r: " + result);
+			for(int g = 1; g < x; g++){
+				result = result * z;
 			}
+			
+
+			mensagem = ("Dado "+ i + " Calculo: " + result);
+			System.out.println(mensagem);
 			output.println(mensagem);
 		}
-	
+
+
+
 		
-	
+
+		
 		
 		output.println("FIM");
 		System.out.println("Conecao sera encerrada");
@@ -316,7 +165,6 @@ public class Atendente implements Runnable{
 		close();
 	}
 	
-	
-	
+
 	
 }
