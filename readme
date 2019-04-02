@@ -1,13 +1,8 @@
-Trabalho da camada de transporte para a disciplina de Redes de Computados
+Trabalho para a disciplina Computação Distribuida
 
-Trabalho feito por Jeferson A. Schein
+Trabalho feito por Jeferson A. Schein e Jovani de Souza
 
-Otimizado para a plataforma windows.
-pois os dados sao formatados diferentes quando é faita a leitura do arquivo de entrada
-
-porem a comunicacao funciona entre os dois sistemas diferente, porem os calculos sao feitos somente para dados informados pelo windows.
-
-para executar
+Para executar
 
 Executar o servidor:
 java Servidor
@@ -19,7 +14,7 @@ java Cliente "199.265.145.2" 48484 entrada.csv
 O cliene faz o carregamento dos dados em um vetor de string,
 entao cada linha é enviada para o servidor,
 o servidor le todas as linhas do arquivo e salva em uma lista de strings.
-entao o servidor constroe o cabecalho da matriz
+
 e vai calculando as distancias entre as cidades, e os dados sao enviados cada linha pra o cliente 
 que escreve a linha direto no arquivo de saida
 e finaliza
